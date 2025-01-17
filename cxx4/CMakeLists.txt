@@ -3,8 +3,67 @@
 # Set up headers and sources
 ###
 
-file(GLOB CXX_HEADERS *.h)
-file(GLOB CXX_SOURCES nc*.cpp)
+set(CXX_HEADERS
+  ncAtt.h
+  ncByte.h
+  ncChar.h
+  ncCheck.h
+  ncCompoundType.h
+  ncDim.h
+  ncDouble.h
+  ncEnumType.h
+  ncException.h
+  ncFile.h
+  ncFill.h
+  ncFilter.h
+  ncFloat.h
+  ncGroup.h
+  ncGroupAtt.h
+  ncInt.h
+  ncInt64.h
+  ncOpaqueType.h
+  ncShort.h
+  ncString.h
+  ncType.h
+  ncUbyte.h
+  ncUint.h
+  ncUint64.h
+  ncUshort.h
+  ncVar.h
+  ncVarAtt.h
+  ncVlenType.h
+)
+
+set(CXX_SOURCES
+  ncAtt.cpp
+  ncByte.cpp
+  ncChar.cpp
+  ncCheck.cpp
+  ncCompoundType.cpp
+  ncDim.cpp
+  ncDouble.cpp
+  ncEnumType.cpp
+  ncException.cpp
+  ncFile.cpp
+  ncFill.cpp
+  ncFilter.cpp
+  ncFloat.cpp
+  ncGroup.cpp
+  ncGroupAtt.cpp
+  ncInt.cpp
+  ncInt64.cpp
+  ncOpaqueType.cpp
+  ncShort.cpp
+  ncString.cpp
+  ncType.cpp
+  ncUbyte.cpp
+  ncUint.cpp
+  ncUint64.cpp
+  ncUshort.cpp
+  ncVar.cpp
+  ncVarAtt.cpp
+  ncVlenType.cpp
+)
 
 ###
 # Set up tests.
@@ -30,10 +89,8 @@ SET(ALL_TLL_LIBS ${ALL_TLL_LIBS} ${EXTRA_DEPS} PARENT_SCOPE)
 ADD_LIBRARY(netcdf-cxx4 ${CXX_SOURCES})
 add_library(netCDF::netcdf-cxx4 ALIAS netcdf-cxx4)
 
-TARGET_INCLUDE_DIRECTORIES(netcdf-cxx4 PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-  $<INSTALL_INTERFACE:include>
-  )
+TARGET_INCLUDE_DIRECTORIES(netcdf-cxx4 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
 TARGET_LINK_LIBRARIES(netcdf-cxx4 PUBLIC netCDF::netcdf)
 TARGET_LINK_LIBRARIES(netcdf-cxx4 PUBLIC ${ALL_TLL_LIBS})
 target_include_directories(netcdf-cxx4 SYSTEM PUBLIC "${HDF5_INCLUDE_DIRS}")
@@ -43,18 +100,3 @@ SET_TARGET_PROPERTIES(netcdf-cxx4 PROPERTIES
   SOVERSION ${NCXX_SO_VERSION}
   )
 
-INSTALL(
-  FILES ${CXX_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-  )
-INSTALL(
-  FILES netcdf
-  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-  )
-INSTALL(
-  TARGETS netcdf-cxx4
-  EXPORT netcdf-cxx4Targets
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-  )
