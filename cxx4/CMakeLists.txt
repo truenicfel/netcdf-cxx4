@@ -1,102 +1,78 @@
-## This is a CMake file, part of Unidata's netcdf-cxx package.
-###
-# Set up headers and sources
-###
-
 set(CXX_HEADERS
-  ncAtt.h
-  ncByte.h
-  ncChar.h
-  ncCheck.h
-  ncCompoundType.h
-  ncDim.h
-  ncDouble.h
-  ncEnumType.h
-  ncException.h
-  ncFile.h
-  ncFill.h
-  ncFilter.h
-  ncFloat.h
-  ncGroup.h
-  ncGroupAtt.h
-  ncInt.h
-  ncInt64.h
-  ncOpaqueType.h
-  ncShort.h
-  ncString.h
-  ncType.h
-  ncUbyte.h
-  ncUint.h
-  ncUint64.h
-  ncUshort.h
-  ncVar.h
-  ncVarAtt.h
-  ncVlenType.h
+  include/ncAtt.h
+  include/ncByte.h
+  include/ncChar.h
+  include/ncCheck.h
+  include/ncCompoundType.h
+  include/ncDim.h
+  include/ncDouble.h
+  include/ncEnumType.h
+  include/ncException.h
+  include/ncFile.h
+  include/ncFill.h
+  include/ncFilter.h
+  include/ncFloat.h
+  include/ncGroup.h
+  include/ncGroupAtt.h
+  include/ncInt.h
+  include/ncInt64.h
+  include/ncOpaqueType.h
+  include/ncShort.h
+  include/ncString.h
+  include/ncType.h
+  include/ncUbyte.h
+  include/ncUint.h
+  include/ncUint64.h
+  include/ncUshort.h
+  include/ncVar.h
+  include/ncVarAtt.h
+  include/ncVlenType.h
 )
 
 set(CXX_SOURCES
-  ncAtt.cpp
-  ncByte.cpp
-  ncChar.cpp
-  ncCheck.cpp
-  ncCompoundType.cpp
-  ncDim.cpp
-  ncDouble.cpp
-  ncEnumType.cpp
-  ncException.cpp
-  ncFile.cpp
-  ncFill.cpp
-  ncFilter.cpp
-  ncFloat.cpp
-  ncGroup.cpp
-  ncGroupAtt.cpp
-  ncInt.cpp
-  ncInt64.cpp
-  ncOpaqueType.cpp
-  ncShort.cpp
-  ncString.cpp
-  ncType.cpp
-  ncUbyte.cpp
-  ncUint.cpp
-  ncUint64.cpp
-  ncUshort.cpp
-  ncVar.cpp
-  ncVarAtt.cpp
-  ncVlenType.cpp
+  src/ncAtt.cpp
+  src/ncByte.cpp
+  src/ncChar.cpp
+  src/ncCheck.cpp
+  src/ncCompoundType.cpp
+  src/ncDim.cpp
+  src/ncDouble.cpp
+  src/ncEnumType.cpp
+  src/ncException.cpp
+  src/ncFile.cpp
+  src/ncFill.cpp
+  src/ncFilter.cpp
+  src/ncFloat.cpp
+  src/ncGroup.cpp
+  src/ncGroupAtt.cpp
+  src/ncInt.cpp
+  src/ncInt64.cpp
+  src/ncOpaqueType.cpp
+  src/ncShort.cpp
+  src/ncString.cpp
+  src/ncType.cpp
+  src/ncUbyte.cpp
+  src/ncUint.cpp
+  src/ncUint64.cpp
+  src/ncUshort.cpp
+  src/ncVar.cpp
+  src/ncVarAtt.cpp
+  src/ncVlenType.cpp
 )
 
-###
-# Set up tests.
-###
-IF(NCXX_ENABLE_TESTS)
+find_package(netCDF QUIET)
 
-  add_bin_test(cxx4 test_classic)
-  add_bin_test(cxx4 test_group)
-  add_bin_test(cxx4 test_dim)
-  add_bin_test(cxx4 test_att)
-  add_bin_test(cxx4 test_var)
-  add_bin_test(cxx4 test_var2)
-  add_bin_test(cxx4 test_type)
-  add_bin_test(cxx4 test_open_close)
-  add_bin_test(cxx4 test_ncFile_Flags)
-  add_bin_test(cxx4 test_filter)
+add_library(netcdf-cxx4 ${CXX_SOURCES})
 
-ENDIF()
+target_include_directories(netcdf-cxx4 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(netcdf-cxx4 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_include_directories(netcdf-cxx4 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/netcdf-cxx)
 
-SET(ALL_TLL_LIBS ${HDF5_C_LIBRARY_hdf5})
-SET(ALL_TLL_LIBS ${ALL_TLL_LIBS} ${EXTRA_DEPS} PARENT_SCOPE)
+target_link_libraries(netcdf-cxx4 PUBLIC netCDF::netcdf)
 
-ADD_LIBRARY(netcdf-cxx4 ${CXX_SOURCES})
-add_library(netCDF::netcdf-cxx4 ALIAS netcdf-cxx4)
+if(NCXX_BUILD_TESTS)
+	add_subdirectory(test)
+endif(NCXX_BUILD_TESTS)
 
-TARGET_INCLUDE_DIRECTORIES(netcdf-cxx4 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-TARGET_LINK_LIBRARIES(netcdf-cxx4 PUBLIC netCDF::netcdf)
-TARGET_LINK_LIBRARIES(netcdf-cxx4 PUBLIC ${ALL_TLL_LIBS})
-target_include_directories(netcdf-cxx4 SYSTEM PUBLIC "${HDF5_INCLUDE_DIRS}")
-
-SET_TARGET_PROPERTIES(netcdf-cxx4 PROPERTIES
-  VERSION ${NCXX_LIB_VERSION}
-  SOVERSION ${NCXX_SO_VERSION}
-  )
 

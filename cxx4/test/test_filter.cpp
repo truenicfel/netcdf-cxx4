@@ -2,9 +2,9 @@
 // Usage:   xma2netcdf <shot number>
 
 #include <iostream>
-#include <ncFile.h>
-#include <ncVar.h>
-#include <ncException.h>
+#include <netcdf-cxx/ncFile.h>
+#include <netcdf-cxx/ncVar.h>
+#include <netcdf-cxx/ncException.h>
 #include <string>
 #include <netcdf>
 #include "test_utilities.h"

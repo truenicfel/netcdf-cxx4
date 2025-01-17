@@ -1,8 +1,15 @@
-################################################
-# CMakeLists.txt: CMake Configuration file
-# for the netcdf-cxx4 `examples` directory.
-################################################
+macro(ncxx_add_example EXAMPLE_NAME SOURCE_FILE)
+	add_executable(${EXAMPLE_NAME} ${SOURCE_FILE})
+	target_link_libraries(${EXAMPLE_NAME} PRIVATE netcdf-cxx4)
+	target_include_directories(${EXAMPLE_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+	message(STATUS "Added example ${EXAMPLE_NAME}!")
+endmacro(ncxx_add_example)
 
-add_executable(simple_xy_write simple_xy_wr.cpp)
 
-target_link_libraries(simple_xy_write PUBLIC netcdf-cxx4)
+ncxx_add_example(pres_temp_4D_rd pres_temp_4D_rd.cpp)
+ncxx_add_example(pres_temp_4D_wr pres_temp_4D_wr.cpp)
+ncxx_add_example(sfc_pres_temp_rd sfc_pres_temp_rd.cpp)
+ncxx_add_example(sfc_pres_temp_wr sfc_pres_temp_wr.cpp)
+ncxx_add_example(simple_xy_rd simple_xy_rd.cpp)
+ncxx_add_example(simple_xy_wr simple_xy_wr.cpp)
+ncxx_add_example(simple_xy_wr_formats simple_xy_wr_formats.cpp)
