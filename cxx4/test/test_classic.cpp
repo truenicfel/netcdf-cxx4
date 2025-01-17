@@ -1,7 +1,7 @@
 #include <iostream>
-#include <ncFile.h>
-#include <ncDim.h>
-#include <ncException.h>
+#include <netcdf-cxx/ncFile.h>
+#include <netcdf-cxx/ncDim.h>
+#include <netcdf-cxx/ncException.h>
 #include <iomanip>
 #include <netcdf>
 

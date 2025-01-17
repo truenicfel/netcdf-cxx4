@@ -1,0 +1,32 @@
+//
+// generic include file for the netCDF C++ API
+//
+extern "C" {
+#include <netcdf.h>
+}
+#include <netcdf-cxx/ncAtt.h>
+#include <netcdf-cxx/ncByte.h>
+#include <netcdf-cxx/ncChar.h>
+#include <netcdf-cxx/ncCheck.h>
+#include <netcdf-cxx/ncCompoundType.h>
+#include <netcdf-cxx/ncDim.h>
+#include <netcdf-cxx/ncDouble.h>
+#include <netcdf-cxx/ncEnumType.h>
+#include <netcdf-cxx/ncException.h>
+#include <netcdf-cxx/ncFile.h>
+#include <netcdf-cxx/ncFloat.h>
+#include <netcdf-cxx/ncGroup.h>
+#include <netcdf-cxx/ncGroupAtt.h>
+#include <netcdf-cxx/ncInt.h>
+#include <netcdf-cxx/ncInt64.h>
+#include <netcdf-cxx/ncOpaqueType.h>
+#include <netcdf-cxx/ncShort.h>
+#include <netcdf-cxx/ncString.h>
+#include <netcdf-cxx/ncType.h>
+#include <netcdf-cxx/ncUbyte.h>
+#include <netcdf-cxx/ncUint.h>
+#include <netcdf-cxx/ncUint64.h>
+#include <netcdf-cxx/ncUshort.h>
+#include <netcdf-cxx/ncVar.h>
+#include <netcdf-cxx/ncVarAtt.h>
+#include <netcdf-cxx/ncVlenType.h>
